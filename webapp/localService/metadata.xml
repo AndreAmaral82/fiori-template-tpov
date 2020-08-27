@@ -1,0 +1,76 @@
+<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+	xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+	<edmx:Reference xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"
+		Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value"><edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/></edmx:Reference>
+	<edmx:Reference xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"
+		Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='LOCAL')/$value"><edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/></edmx:Reference>
+	<edmx:Reference xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"
+		Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='LOCAL')/$value"><edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/></edmx:Reference>
+	<edmx:Reference xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"
+		Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='LOCAL')/$value"><edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="Aggregation"/></edmx:Reference>
+	<edmx:Reference xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"
+		Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='LOCAL')/$value"><edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/></edmx:Reference>
+	<edmx:DataServices m:DataServiceVersion="2.0">
+		<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZFCI_CDS_TPOV_CDS" xml:lang="pt" sap:schema-version="1">
+			<EntityType Name="ZFCI_CDS_DOCSALETYPEType" sap:label="Tipo de Doc. de Venda" sap:content-version="1">
+				<Key><PropertyRef Name="docsaletype"/></Key><Property Name="docsaletype" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:text="docsaletype_Text"
+					sap:label="Tipo doc.vendas" sap:quickinfo="Tipo de documento de vendas"/><Property Name="docsaletype_Text" Type="Edm.String" MaxLength="20" sap:label="Descrição"
+					sap:quickinfo="Descrição do tipo de documento de vendas" sap:creatable="false" sap:updatable="false"/></EntityType>
+			<EntityType Name="ZFCI_CDS_TPOVType" sap:label="FCI - Tipo de OV" sap:content-version="1">
+				<Key><PropertyRef Name="auart"/></Key><Property Name="auart_fc" Type="Edm.Byte" sap:label="Controle campo din." sap:creatable="false" sap:updatable="false" sap:sortable="false"
+					sap:filterable="false"/><Property Name="auart" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:field-control="auart_fc"
+					sap:label="Tipo de Documento de Venda" sap:quickinfo="Tipo de documento de vendas" sap:value-list="standard"/><NavigationProperty Name="to_DocSaleType" Relationship="ZFCI_CDS_TPOV_CDS.assoc_8557A6C5ACCCA23FBB97F07F0E5D13F1"
+					FromRole="FromRole_assoc_8557A6C5ACCCA23FBB97F07F0E5D13F1" ToRole="ToRole_assoc_8557A6C5ACCCA23FBB97F07F0E5D13F1"/></EntityType>
+			<Association Name="assoc_8557A6C5ACCCA23FBB97F07F0E5D13F1" sap:content-version="1"><End Type="ZFCI_CDS_TPOV_CDS.ZFCI_CDS_TPOVType" Multiplicity="1" Role="FromRole_assoc_8557A6C5ACCCA23FBB97F07F0E5D13F1"/><End Type="ZFCI_CDS_TPOV_CDS.ZFCI_CDS_DOCSALETYPEType" Multiplicity="1" Role="ToRole_assoc_8557A6C5ACCCA23FBB97F07F0E5D13F1"/></Association>
+			<EntityContainer Name="ZFCI_CDS_TPOV_CDS_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true"
+				sap:supported-formats="atom json xlsx"><EntitySet Name="ZFCI_CDS_DOCSALETYPE" EntityType="ZFCI_CDS_TPOV_CDS.ZFCI_CDS_DOCSALETYPEType" sap:creatable="false" sap:updatable="false"
+				sap:deletable="false" sap:searchable="true" sap:content-version="1"/><EntitySet Name="ZFCI_CDS_TPOV" EntityType="ZFCI_CDS_TPOV_CDS.ZFCI_CDS_TPOVType" sap:content-version="1"/>
+				<AssociationSet Name="assoc_8557A6C5ACCCA23FBB97F07F0E5D13F1" Association="ZFCI_CDS_TPOV_CDS.assoc_8557A6C5ACCCA23FBB97F07F0E5D13F1"
+					sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"><End EntitySet="ZFCI_CDS_TPOV" Role="FromRole_assoc_8557A6C5ACCCA23FBB97F07F0E5D13F1"/><End EntitySet="ZFCI_CDS_DOCSALETYPE" Role="ToRole_assoc_8557A6C5ACCCA23FBB97F07F0E5D13F1"/></AssociationSet>
+			</EntityContainer>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZFCI_CDS_TPOV_CDS.ZFCI_CDS_TPOVType/auart">
+				<Annotation Term="Common.ValueList">
+					<Record><PropertyValue Property="Label" String="Tipo de Doc. de Venda"/><PropertyValue Property="CollectionPath" String="ZFCI_CDS_DOCSALETYPE"/><PropertyValue Property="SearchSupported" Bool="true"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterInOut"><PropertyValue Property="LocalDataProperty" PropertyPath="auart"/><PropertyValue Property="ValueListProperty" String="docsaletype"/></Record>
+								<Record Type="Common.ValueListParameterDisplayOnly"><PropertyValue Property="ValueListProperty" String="docsaletype_Text"/></Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZFCI_CDS_TPOV_CDS.ZFCI_CDS_TPOV_CDS_Entities">
+				<Annotation Term="Aggregation.ApplySupported">
+					<Record>
+						<PropertyValue Property="Transformations">
+							<Collection>
+								<String>aggregate</String>
+								<String>groupby</String>
+								<String>filter</String>
+							</Collection>
+						</PropertyValue><PropertyValue Property="Rollup" EnumMember="None"/></Record>
+				</Annotation>
+			</Annotations>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZFCI_CDS_TPOV_CDS.ZFCI_CDS_TPOV_CDS_Entities/ZFCI_CDS_TPOV">
+				<Annotation Term="Capabilities.FilterRestrictions">
+					<Record>
+						<PropertyValue Property="NonFilterableProperties">
+							<Collection>
+								<PropertyPath>auart_fc</PropertyPath>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="Capabilities.SortRestrictions">
+					<Record>
+						<PropertyValue Property="NonSortableProperties">
+							<Collection>
+								<PropertyPath>auart_fc</PropertyPath>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations><atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZFCI_CDS_TPOV_CDS/$metadata"/><atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/ZFCI_CDS_TPOV_CDS/$metadata"/></Schema>
+	</edmx:DataServices>
+</edmx:Edmx>
